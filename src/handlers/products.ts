@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 import { Product, ProductStore } from '../models/product'
+import verifyAuthToken from '../middlewares/authentication'
 
 const store = new ProductStore();
 
@@ -70,9 +71,9 @@ const product_routes = (app: express.Application) => {
     app.get('/products', index)
     app.get('/products/:id', show)
     app.get('/products/category/:category', showProductsByCategory)
-    app.post('/products', create)
-    app.put('/products', update)
-    app.delete('/products/:id', destroy)
+    app.post('/products', verifyAuthToken, create)
+    app.put('/products', verifyAuthToken, update)
+    app.delete('/products/:id', verifyAuthToken, destroy)
 }
 
 export default product_routes
