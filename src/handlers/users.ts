@@ -1,5 +1,7 @@
 import express, { Request, Response } from 'express'
 import { User, UserStore } from '../models/user'
+import verifyAuthToken from '../middlewares/authentication'
+import verifyUser from  '../middlewares/same_user'
 
 const store = new UserStore();
 
@@ -56,10 +58,10 @@ const authenticate = async (req: Request, res: Response) => {
 }
 
 const user_routes = (app: express.Application) => {
-    app.get('/users', index)
-    app.get('/users/:id', show)
+    app.get('/users', verifyAuthToken, index)
+    app.get('/users/:id', verifyAuthToken, show)
     app.post('/users', create)
-    app.put('/users', changePassword)
+    app.put('/users', verifyUser, changePassword)
     app.post('/users/authenticate', authenticate)
 }
 
