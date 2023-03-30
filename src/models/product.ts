@@ -38,6 +38,22 @@ export class ProductStore {
         }
     }
 
+    //Show product by category
+    async showProductsByCategory(category: string): Promise<Product[]> {
+        try {
+            const sql = 'SELECT * FROM products WHERE category = ($1)'
+            const conn = await Client.connect()
+
+            const result = await conn.query(sql, [category])
+            //console.log(result.rows[0])
+
+            conn.release()
+            return result.rows
+        } catch (err) {
+            throw new Error(`Could not find products by category: ${category}. Error: ${err}`)
+        }
+    }
+
     async create(p: Product): Promise<Product> {
         try {
             const sql = 'INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *'

@@ -9,13 +9,23 @@ const index = async (_req: Request, res: Response) => {
         res.json(products)
     } catch (err) {
         res.status(400)
-        res.json(err)
+        res.json(`${err}`)
     }
 }
 
 const show = async (req: Request, res: Response) => {
     const product = await store.show(req.params.id)
     res.json(product)
+}
+
+const showProductsByCategory = async (req: Request, res: Response) => {
+    try {
+        const products = await store.showProductsByCategory(req.params.category)
+        res.json(products)
+    } catch (err) {
+        res.status(400)
+        res.json(`${err}`)
+    }
 }
 
 const create = async (req: Request, res: Response) => {
@@ -30,7 +40,7 @@ const create = async (req: Request, res: Response) => {
         res.json(newProduct)
     } catch(err) {
         res.status(400)
-        res.json(err)
+        res.json(`${err}`)
     }
 }
 
@@ -47,7 +57,7 @@ const update = async (req: Request, res: Response) => {
         res.json(updatedProduct)
     } catch(err) {
         res.status(400)
-        res.json(err)
+        res.json(`${err}`)
     }
 }
 
@@ -59,6 +69,7 @@ const destroy = async (req: Request, res: Response) => {
 const product_routes = (app: express.Application) => {
     app.get('/products', index)
     app.get('/products/:id', show)
+    app.get('/products/category/:category', showProductsByCategory)
     app.post('/products', create)
     app.put('/products', update)
     app.delete('/products/:id', destroy)
