@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express'
 
 import { DashboardQueries } from '../services/dashboard'
+import verifyAuthToken from '../middlewares/authentication'
 
 const dashboardRoutes = (app: express.Application) => {
     app.get('/five_most_popular_products', mostPopularProducts)
-    app.get('/users_order_completed', usersOrderCompleted)
+    app.get('/users_order_completed', verifyAuthToken, usersOrderCompleted)
     app.get('/five_most_expensive_products', expensiveProducts)
 }
 //users with completed orders
