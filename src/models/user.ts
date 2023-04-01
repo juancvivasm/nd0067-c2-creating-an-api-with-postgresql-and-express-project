@@ -59,7 +59,7 @@ export class UserStore {
 
             const user = userresult.rows[0]
 
-            console.log(user)
+            //console.log(user)
             
             if (user) {
                 throw new Error(`because it already exists`)
@@ -75,7 +75,7 @@ export class UserStore {
 
             const result = await conn.query(sql, [u.username, u.firstname, u.lastname, hash])
             const newUser = result.rows[0]
-            console.log(newUser)
+            //console.log(newUser)
             var token = jwt.sign({ user: newUser }, secret!);
 
             conn.release()
@@ -99,7 +99,7 @@ export class UserStore {
 
             const result = await conn.query(sql, [username, hash])
             const updatedUser = result.rows[0]
-            console.log(updatedUser)
+            //console.log(updatedUser)
             var token = jwt.sign({ user: updatedUser }, secret!);
 
             conn.release()
@@ -116,13 +116,13 @@ export class UserStore {
 
         const result = await conn.query(sql, [username])
 
-        console.log(password + pepper)
+        //console.log(password + pepper)
 
         if (result.rows.length) {
 
             const aUser = result.rows[0]
 
-            console.log(aUser)
+            //console.log(aUser)
 
             if (bcrypt.compareSync(password + pepper, aUser.password)) {
                 return jwt.sign({ user: aUser }, secret!);

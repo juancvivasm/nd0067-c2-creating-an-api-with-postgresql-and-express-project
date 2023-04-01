@@ -44,7 +44,7 @@ describe("Product Model", () => {
     })
 
     it('should have an Index method', () => {
-        expect(store.index).toBeDefined();
+        expect(store.index).toBeDefined()
     })
 
     it('Index method should return a list of products', async () => {
@@ -54,7 +54,7 @@ describe("Product Model", () => {
             name: 'Test Product 01',
             price: 11,
             category: 'Category 02'
-        }]);
+        }])
     })
 
     it('should have a Show method', () => {
@@ -87,13 +87,13 @@ describe("Product Model", () => {
 
     it('should have a Delete method', () => {
         expect(store.delete).toBeDefined();
-    });
+    })
 
     it('Delete method should remove a product', async () => {
         let product_id = "1";
         store.delete(product_id);
         const result = await store.show(product_id)
         expect(result).toBeNull;
-    });
+    })
 
 })
