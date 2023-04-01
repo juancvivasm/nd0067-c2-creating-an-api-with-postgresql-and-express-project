@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "test": "jasmine-ts",
+    "test": "npx tsc && jasmine",
     "tsc": "tsc"
   },
   "author": "Udacity",
@@ -29,9 +29,11 @@
     "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.15.11",
     "@types/pg": "^7.14.7",
+    "@types/supertest": "^2.0.12",
     "jasmine": "^3.6.4",
     "jasmine-spec-reporter": "^6.0.0",
     "jasmine-ts": "^0.3.0",
+    "supertest": "^6.3.3",
     "ts-node": "^9.1.1",
     "tsc-watch": "^4.2.9"
   }
