@@ -13,7 +13,7 @@ describe("Product Model", () => {
             price: 10,
             category: 'Category 01'
         }
-        const result = await store.create(product);
+        const result = await store.create(product)
         expect(result).toEqual({
             id: 1,
             name: product.name,
@@ -48,7 +48,7 @@ describe("Product Model", () => {
     })
 
     it('Index method should return a list of products', async () => {
-        const result = await store.index();
+        const result = await store.index()
         expect(result).toEqual([{
             id: 1,
             name: 'Test Product 01',
