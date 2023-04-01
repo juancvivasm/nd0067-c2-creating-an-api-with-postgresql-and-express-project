@@ -1,8 +1,13 @@
 import { User, UserStore } from "../../models/user"
+import Client from "../../database"
 
 const store = new UserStore()
 
+//jasmine.DEFAULT_TIMEOUT_INTERVAL = 60 * 1000;
+//jasmine.getEnv().defaultTimeoutInterval = 60000;
+
 describe("User Model", () => {
+    
     it('should have a Create method', () => {
         expect(store.create).toBeDefined()
     })
@@ -78,6 +83,7 @@ describe("User Model", () => {
         const authenticatedUser = await store.authenticate(username, password)
         //console.log(authenticatedUser)
         expect(typeof authenticatedUser).toBe('string')
+        expect(authenticatedUser).not.toBe('Invalid username or password')
     })
 
 })

@@ -1,7 +1,7 @@
 import supertest from 'supertest'
 import app from '../../server'
 import { User, UserStore } from "../../models/user"
-import { Product, ProductStore } from "../../models/product"
+import { Product } from "../../models/product"
 import Client from "../../database"
 
 const request = supertest(app)
@@ -14,7 +14,7 @@ describe('Tests for product endpoints', () => {
         username: 'juancvivasm',
         password: '12345'
     }
-    let token: string;
+    let token: string
 
     let product01: Product = {
         name: 'Test Product 01',
