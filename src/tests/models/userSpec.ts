@@ -1,5 +1,4 @@
 import { User, UserStore } from "../../models/user"
-import Client from "../../database"
 
 const store = new UserStore()
 

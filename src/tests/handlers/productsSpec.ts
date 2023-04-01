@@ -25,8 +25,9 @@ describe('Tests for product endpoints', () => {
     beforeAll(async function() {
         const conn = await Client.connect()
         const sql = 'TRUNCATE users, products RESTART IDENTITY CASCADE'
-        const result = await conn.query(sql)
-        //console.log(result)
+        await conn.query(sql)
+        conn.release()
+
         token = await userStore.create(user)
         //console.log(token)
     })
@@ -34,8 +35,8 @@ describe('Tests for product endpoints', () => {
     afterAll(async function() {
         const conn = await Client.connect()
         const sql = 'TRUNCATE users, products RESTART IDENTITY CASCADE'
-        const result = await conn.query(sql)
-        //console.log(result)
+        await conn.query(sql)
+        conn.release()
     })
 
     describe('Add a product', () => {

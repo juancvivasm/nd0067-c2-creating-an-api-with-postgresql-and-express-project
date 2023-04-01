@@ -45,7 +45,7 @@ const addProduct = async (req: Request, res: Response) => {
     const quantity: number = parseInt(req.body.quantity)
     try {
         const order = await store.show(orderId.toString())
-        console.log(order)
+        //console.log(order)
         if(order.status !== 'active'){
             throw new Error('The order is not active')
         }

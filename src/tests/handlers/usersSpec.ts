@@ -18,15 +18,15 @@ describe('Tests for user endpoints', () => {
     beforeAll(async function() {
         const conn = await Client.connect()
         const sql = 'TRUNCATE users RESTART IDENTITY CASCADE'
-        const result = await conn.query(sql)
-        //console.log(result)
+        await conn.query(sql)
+        conn.release()
     })
 
     afterAll(async function() {
         const conn = await Client.connect()
         const sql = 'TRUNCATE users RESTART IDENTITY CASCADE'
-        const result = await conn.query(sql)
-        //console.log(result)
+        await conn.query(sql)
+        conn.release()
     })
 
     describe('Add a user', () => {

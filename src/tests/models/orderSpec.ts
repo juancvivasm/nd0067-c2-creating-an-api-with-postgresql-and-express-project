@@ -32,8 +32,9 @@ describe("Order Model", () => {
     beforeAll(async function() {
         const conn = await Client.connect()
         const sql = 'TRUNCATE users, products RESTART IDENTITY CASCADE'
-        const result = await conn.query(sql)
-        //console.log(result)
+        await conn.query(sql)
+        conn.release()
+       
         await userStore.create(user01)
         users = await userStore.index()
         //console.log(users)
@@ -47,8 +48,8 @@ describe("Order Model", () => {
     afterAll(async function() {
         const conn = await Client.connect()
         const sql = 'TRUNCATE users, products RESTART IDENTITY CASCADE'
-        const result = await conn.query(sql)
-        //console.log(result)
+        await conn.query(sql)
+        conn.release()
     })
     
     it('should have a Create method', () => {
