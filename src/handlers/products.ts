@@ -15,8 +15,13 @@ const index = async (_req: Request, res: Response) => {
 }
 
 const show = async (req: Request, res: Response) => {
-    const product = await store.show(req.params.id)
-    res.json(product)
+    try {
+        const product = await store.show(req.params.id)
+        res.json(product)
+    } catch (error) {
+        res.status(400)
+        res.json(`${error}`)
+    }
 }
 
 const showProductsByCategory = async (req: Request, res: Response) => {
@@ -39,7 +44,7 @@ const create = async (req: Request, res: Response) => {
 
         const newProduct = await store.create(product)
         res.json(newProduct)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }
@@ -56,15 +61,20 @@ const update = async (req: Request, res: Response) => {
 
         const updatedProduct = await store.update(product)
         res.json(updatedProduct)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }
 }
 
 const destroy = async (req: Request, res: Response) => {
-    const deleted = await store.delete(req.params.id)
-    res.json(deleted)
+    try {
+        const deleted = await store.delete(req.params.id)
+        res.json(deleted)
+    } catch (err) {
+        res.status(400)
+        res.json(`${err}`)
+    }
 }
 
 const product_routes = (app: express.Application) => {

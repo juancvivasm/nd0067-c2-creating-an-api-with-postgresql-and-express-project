@@ -15,13 +15,23 @@ const index = async (_req: Request, res: Response) => {
 }
 
 const show = async (req: Request, res: Response) => {
-    const order = await store.show(req.params.id)
-    res.json(order)
+    try {
+        const order = await store.show(req.params.id)
+        res.json(order)
+    } catch (err) {
+        res.status(400)
+        res.json(`${err}`)
+    }
 }
 
 const showByUserId = async (req: Request, res: Response) => {
-    const orders = await store.showByUserId(req.params.id)
-    res.json(orders)
+    try {
+        const orders = await store.showByUserId(req.params.id)
+        res.json(orders)
+    } catch (err) {
+        res.status(400)
+        res.json(`${err}`)
+    }
 }
 
 const create = async (req: Request, res: Response) => {
@@ -33,7 +43,7 @@ const create = async (req: Request, res: Response) => {
 
         const newOrder = await store.create(order)
         res.json(newOrder)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }
@@ -46,13 +56,13 @@ const addProduct = async (req: Request, res: Response) => {
     try {
         const order = await store.show(orderId.toString())
         //console.log(order)
-        if(order.status !== 'active'){
+        if (order.status !== 'active') {
             throw new Error('The order is not active')
         }
 
         const addedProduct = await store.addProduct(quantity, orderId, productId)
         res.json(addedProduct)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }
@@ -62,7 +72,7 @@ const orderComplete = async (req: Request, res: Response) => {
     try {
         const order = await store.orderComplete(req.params.id)
         res.json(order)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }

@@ -14,7 +14,7 @@ const {
 } = process.env
 
 let client: Pool = new Pool()
-console.log(ENV)
+//console.log(ENV)
 
 if (ENV?.toString().trim() === 'test') {
     console.log('Inicio con credenciales de TEST')

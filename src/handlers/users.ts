@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import { User, UserStore } from '../models/user'
 import verifyAuthToken from '../middlewares/authentication'
-import verifyUser from  '../middlewares/same_user'
+import verifyUser from '../middlewares/same_user'
 
 const store = new UserStore();
 
@@ -16,8 +16,13 @@ const index = async (_req: Request, res: Response) => {
 }
 
 const show = async (req: Request, res: Response) => {
-    const user = await store.show(req.params.id)
-    res.json(user)
+    try {
+        const user = await store.show(req.params.id)
+        res.json(user)
+    } catch (error) {
+        res.status(400)
+        res.json(`${error}`)
+    }
 }
 
 const create = async (req: Request, res: Response) => {
@@ -31,7 +36,7 @@ const create = async (req: Request, res: Response) => {
 
         const newUser = await store.create(user)
         res.json(newUser)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }
@@ -41,7 +46,7 @@ const changePassword = async (req: Request, res: Response) => {
     try {
         const updatedUser = await store.changePassword(req.body.username, req.body.password)
         res.json(updatedUser)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }
@@ -51,7 +56,7 @@ const authenticate = async (req: Request, res: Response) => {
     try {
         const user = await store.authenticate(req.body.username, req.body.password)
         res.json(user)
-    } catch(err) {
+    } catch (err) {
         res.status(400)
         res.json(`${err}`)
     }
